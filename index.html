@@ -1,353 +1,56 @@
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>দেশখোঁজ | DeshKhoj</title>
-
 <style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f0f7f2;
-  color:#173d2b;
-}
-header{
-  background:#087443;
-  color:white;
-  text-align:center;
-  padding:25px 12px;
-}
-header h1{margin:0 0 8px;font-size:30px}
-header p{margin:0;font-size:15px}
-main{
-  max-width:750px;
-  margin:20px auto;
-  padding:15px;
-}
-.card{
-  background:white;
-  padding:18px;
-  border-radius:14px;
-  margin-bottom:16px;
-  box-shadow:0 3px 12px #0000000d;
-}
-h2{font-size:20px;margin-top:0}
-label{
-  display:block;
-  font-weight:bold;
-  margin:14px 0 7px;
-}
-input,select,button{
-  width:100%;
-  padding:13px;
-  border:1px solid #b7cfc0;
-  border-radius:9px;
-  font-size:16px;
-  background:white;
-}
-button{
-  background:#087443;
-  color:white;
-  border:0;
-  cursor:pointer;
-  margin-top:12px;
-}
-button:hover{background:#065b35}
-.result{
-  padding:12px;
-  border-bottom:1px solid #e3eee6;
-  cursor:pointer;
-}
-.result:hover{background:#f0f7f2}
-.small{font-size:13px;color:#557262}
-#message{
-  background:#f0f7f2;
-  padding:12px;
-  border-radius:9px;
-  line-height:1.8;
-  overflow-wrap:anywhere;
-}
-footer{
-  text-align:center;
-  padding:20px;
-  color:#557262;
-  font-size:13px;
-}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:#f0f7f2;color:#173d2b}header{background:#087443;color:white;text-align:center;padding:25px 12px}header h1{margin:0 0 8px;font-size:30px}header p{margin:0;font-size:15px}main{max-width:750px;margin:20px auto;padding:15px}.card{background:white;padding:18px;border-radius:14px;margin-bottom:16px;box-shadow:0 3px 12px #0000000d}h2{font-size:20px;margin-top:0}label{display:block;font-weight:bold;margin:14px 0 7px}input,select,button{width:100%;padding:13px;border:1px solid #b7cfc0;border-radius:9px;font-size:16px;background:white;color:#173d2b}button{background:#087443;color:white;border:0;cursor:pointer;margin-top:12px}button:hover{background:#065b35}button:disabled{opacity:.55;cursor:wait}.result{padding:12px;border-bottom:1px solid #e3eee6;cursor:pointer;line-height:1.6}.result:hover{background:#f0f7f2}.small{font-size:13px;color:#557262}#message{background:#f0f7f2;padding:12px;border-radius:9px;line-height:1.8;overflow-wrap:anywhere}.status{padding:10px;border-radius:8px;background:#f0f7f2;font-size:14px;line-height:1.6}footer{text-align:center;padding:20px;color:#557262;font-size:13px}a{color:#087443}@media(max-width:480px){header h1{font-size:26px}main{padding:10px}.card{padding:15px}}
 </style>
 </head>
-
 <body>
-<header>
-  <h1>🇧🇩 দেশখোঁজ</h1>
-  <p>বাংলাদেশের প্রতিটি পথ, আপনার হাতের মুঠোয়</p>
-</header>
-
+<header><h1>🇧🇩 দেশখোঁজ</h1><p>বাংলাদেশের প্রতিটি পথ, আপনার হাতের মুঠোয়</p></header>
 <main>
-  <section class="card">
-    <h2>🔎 জায়গা খুঁজুন</h2>
-    <input id="search" type="search"
-      placeholder="বিভাগ, জেলা বা উপজেলা লিখুন...">
-    <div id="results"></div>
-  </section>
-
-  <section class="card">
-    <h2>📍 বিভাগ থেকে জায়গা নির্বাচন করুন</h2>
-
-    <label for="division">বিভাগ নির্বাচন করুন</label>
-    <select id="division">
-      <option value="">-- বিভাগ বেছে নিন --</option>
-    </select>
-
-    <label for="district">জেলা নির্বাচন করুন</label>
-    <select id="district" disabled>
-      <option value="">-- প্রথমে বিভাগ বেছে নিন --</option>
-    </select>
-
-    <label for="upazila">উপজেলা নির্বাচন করুন</label>
-    <select id="upazila" disabled>
-      <option value="">-- প্রথমে জেলা বেছে নিন --</option>
-    </select>
-
-    <button id="show">তথ্য দেখুন</button>
-  </section>
-
-  <section class="card">
-    <h2>📖 নির্বাচিত স্থানের তথ্য</h2>
-    <div id="message">
-      আপনার পছন্দের বিভাগ, জেলা ও উপজেলা নির্বাচন করুন।
-    </div>
-  </section>
+<section class="card"><h2>🔎 জায়গা খুঁজুন</h2><input id="search" type="search" placeholder="বিভাগ, জেলা বা উপজেলা লিখুন..." autocomplete="off"><div id="results"></div><p class="small">নাম লিখলে মিল থাকা বিভাগ, জেলা ও উপজেলা দেখাবে।</p></section>
+<section class="card"><h2>📍 বিভাগ থেকে জায়গা নির্বাচন করুন</h2><label for="division">বিভাগ নির্বাচন করুন</label><select id="division"><option value="">-- বিভাগ বেছে নিন --</option></select><label for="district">জেলা নির্বাচন করুন</label><select id="district" disabled><option value="">-- প্রথমে বিভাগ বেছে নিন --</option></select><label for="upazila">উপজেলা নির্বাচন করুন</label><select id="upazila" disabled><option value="">-- প্রথমে জেলা বেছে নিন --</option></select><button id="show" disabled>তথ্য দেখুন</button><div id="loadStatus" class="status" style="margin-top:12px">বাংলাদেশের বিভাগ, জেলা ও উপজেলা তালিকা লোড হচ্ছে…</div></section>
+<section class="card"><h2>📖 নির্বাচিত স্থানের তথ্য</h2><div id="message">আপনার পছন্দের বিভাগ, জেলা ও উপজেলা নির্বাচন করুন।</div></section>
 </main>
-
-<footer>
-  দেশখোঁজ | DeshKhoj — বাংলাদেশের স্থান পরিচিতি
-</footer>
-
+<footer>দেশখোঁজ | DeshKhoj — বাংলাদেশের স্থান পরিচিতি<br><span class="small">সম্পূর্ণ অফলাইন সংস্করণ — ইন্টারনেট ছাড়াই ব্যবহারযোগ্য</span></footer>
 <script>
+// সম্পূর্ণ অফলাইন সংস্করণ: কোনো API, fetch বা বাহ্যিক ডেটা প্রয়োজন নেই।
 const districts = {
-  "ঢাকা বিভাগ": [
-    "ঢাকা","গাজীপুর","গোপালগঞ্জ","কিশোরগঞ্জ","মাদারীপুর",
-    "মানিকগঞ্জ","মুন্সীগঞ্জ","নারায়ণগঞ্জ","নরসিংদী",
-    "রাজবাড়ী","ফরিদপুর","শরীয়তপুর","টাঙ্গাইল"
-  ],
-  "চট্টগ্রাম বিভাগ": [
-    "চট্টগ্রাম","কক্সবাজার","কুমিল্লা","ব্রাহ্মণবাড়িয়া",
-    "চাঁদপুর","ফেনী","লক্ষ্মীপুর","নোয়াখালী",
-    "খাগড়াছড়ি","রাঙ্গামাটি","বান্দরবান"
-  ],
-  "রাজশাহী বিভাগ": [
-    "বগুড়া","জয়পুরহাট","নওগাঁ","নাটোর","চাঁপাইনবাবগঞ্জ",
-    "পাবনা","রাজশাহী","সিরাজগঞ্জ"
-  ],
-  "খুলনা বিভাগ": [
-    "বাগেরহাট","চুয়াডাঙ্গা","যশোর","ঝিনাইদহ","খুলনা",
-    "কুষ্টিয়া","মাগুরা","মেহেরপুর","নড়াইল","সাতক্ষীরা"
-  ],
-  "বরিশাল বিভাগ": [
-    "বরগুনা","বরিশাল","ভোলা","ঝালকাঠি","পটুয়াখালী","পিরোজপুর"
-  ],
-  "সিলেট বিভাগ": [
-    "হবিগঞ্জ","মৌলভীবাজার","সুনামগঞ্জ","সিলেট"
-  ],
-  "রংপুর বিভাগ": [
-    "দিনাজপুর","গাইবান্ধা","কুড়িগ্রাম","লালমনিরহাট",
-    "নীলফামারী","পঞ্চগড়","রংপুর","ঠাকুরগাঁও"
-  ],
-  "ময়মনসিংহ বিভাগ": [
-    "জামালপুর","ময়মনসিংহ","নেত্রকোণা","শেরপুর"
-  ]
+  "ঢাকা বিভাগ": ["ঢাকা","গাজীপুর","গোপালগঞ্জ","কিশোরগঞ্জ","মাদারীপুর","মানিকগঞ্জ","মুন্সীগঞ্জ","নারায়ণগঞ্জ","নরসিংদী","রাজবাড়ী","ফরিদপুর","শরীয়তপুর","টাঙ্গাইল"],
+  "চট্টগ্রাম বিভাগ": ["চট্টগ্রাম","কক্সবাজার","কুমিল্লা","ব্রাহ্মণবাড়িয়া","চাঁদপুর","ফেনী","লক্ষ্মীপুর","নোয়াখালী","খাগড়াছড়ি","রাঙ্গামাটি","বান্দরবান"],
+  "রাজশাহী বিভাগ": ["বগুড়া","জয়পুরহাট","নওগাঁ","নাটোর","চাঁপাইনবাবগঞ্জ","পাবনা","রাজশাহী","সিরাজগঞ্জ"],
+  "খুলনা বিভাগ": ["বাগেরহাট","চুয়াডাঙ্গা","যশোর","ঝিনাইদহ","খুলনা","কুষ্টিয়া","মাগুরা","মেহেরপুর","নড়াইল","সাতক্ষীরা"],
+  "বরিশাল বিভাগ": ["বরগুনা","বরিশাল","ভোলা","ঝালকাঠি","পটুয়াখালী","পিরোজপুর"],
+  "সিলেট বিভাগ": ["হবিগঞ্জ","মৌলভীবাজার","সুনামগঞ্জ","সিলেট"],
+  "রংপুর বিভাগ": ["দিনাজপুর","গাইবান্ধা","কুড়িগ্রাম","লালমনিরহাট","নীলফামারী","পঞ্চগড়","রংপুর","ঠাকুরগাঁও"],
+  "ময়মনসিংহ বিভাগ": ["জামালপুর","ময়মনসিংহ","নেত্রকোণা","শেরপুর"]
 };
-
 const upazilas = {
-  "ব্রাহ্মণবাড়িয়া": [
-    "ব্রাহ্মণবাড়িয়া সদর","কসবা","আখাউড়া","নবীনগর",
-    "বাঞ্ছারামপুর","আশুগঞ্জ","সরাইল","নাসিরনগর","বিজয়নগর"
-  ],
-  "চট্টগ্রাম": [
-    "আনোয়ারা","বাঁশখালী","বোয়ালখালী","চন্দনাইশ",
-    "ফটিকছড়ি","হাটহাজারী","কর্ণফুলী","লোহাগাড়া",
-    "মীরসরাই","পটিয়া","রাঙ্গুনিয়া","রাউজান","সন্দ্বীপ",
-    "সাতকানিয়া","সীতাকুণ্ড"
-  ],
-  "কক্সবাজার": [
-    "কক্সবাজার সদর","চকরিয়া","কুতুবদিয়া","মহেশখালী",
-    "পেকুয়া","রামু","টেকনাফ","উখিয়া","ঈদগাঁও"
-  ],
-  "কুমিল্লা": [
-    "কুমিল্লা আদর্শ সদর","কুমিল্লা সদর দক্ষিণ","বরুড়া",
-    "ব্রাহ্মণপাড়া","বুড়িচং","চান্দিনা","চৌদ্দগ্রাম",
-    "দাউদকান্দি","দেবিদ্বার","হোমনা","লাকসাম","লালমাই",
-    "মেঘনা","মনোহরগঞ্জ","মুরাদনগর","নাঙ্গলকোট","তিতাস"
-  ],
-  "চাঁদপুর": [
-    "চাঁদপুর সদর","ফরিদগঞ্জ","হাইমচর","হাজীগঞ্জ",
-    "কচুয়া","মতলব দক্ষিণ","মতলব উত্তর","শাহরাস্তি"
-  ],
-  "ফেনী": [
-    "ফেনী সদর","ছাগলনাইয়া","দাগনভূঞা","পরশুরাম",
-    "ফুলগাজী","সোনাগাজী"
-  ],
-  "লক্ষ্মীপুর": [
-    "লক্ষ্মীপুর সদর","রায়পুর","রামগঞ্জ","রামগতি","কমলনগর"
-  ],
-  "নোয়াখালী": [
-    "নোয়াখালী সদর","বেগমগঞ্জ","চাটখিল","কোম্পানীগঞ্জ",
-    "হাতিয়া","কবিরহাট","সেনবাগ","সোনাইমুড়ী","সুবর্ণচর"
-  ],
-  "খাগড়াছড়ি": [
-    "খাগড়াছড়ি সদর","দীঘিনালা","পানছড়ি","লক্ষ্মীছড়ি",
-    "মহালছড়ি","মানিকছড়ি","রামগড়","মাটিরাঙ্গা","গুইমারা"
-  ],
-  "রাঙ্গামাটি": [
-    "রাঙ্গামাটি সদর","কাপ্তাই","কাউখালী","বাঘাইছড়ি",
-    "বরকল","জুরাছড়ি","বিলাইছড়ি","রাজস্থলী","লংগদু","নানিয়ারচর"
-  ],
-  "বান্দরবান": [
-    "বান্দরবান সদর","আলীকদম","থানচি","লামা",
-    "নাইক্ষ্যংছড়ি","রোয়াংছড়ি","রুমা"
-  ]
+  "ব্রাহ্মণবাড়িয়া":["ব্রাহ্মণবাড়িয়া সদর","কসবা","আখাউড়া","নবীনগর","বাঞ্ছারামপুর","আশুগঞ্জ","সরাইল","নাসিরনগর","বিজয়নগর"],
+  "চট্টগ্রাম":["আনোয়ারা","বাঁশখালী","বোয়ালখালী","চন্দনাইশ","ফটিকছড়ি","হাটহাজারী","কর্ণফুলী","লোহাগাড়া","মীরসরাই","পটিয়া","রাঙ্গুনিয়া","রাউজান","সন্দ্বীপ","সাতকানিয়া","সীতাকুণ্ড"],
+  "কক্সবাজার":["কক্সবাজার সদর","চকরিয়া","কুতুবদিয়া","মহেশখালী","পেকুয়া","রামু","টেকনাফ","উখিয়া","ঈদগাঁও"],
+  "কুমিল্লা":["কুমিল্লা আদর্শ সদর","কুমিল্লা সদর দক্ষিণ","বরুড়া","ব্রাহ্মণপাড়া","বুড়িচং","চান্দিনা","চৌদ্দগ্রাম","দাউদকান্দি","দেবিদ্বার","হোমনা","লাকসাম","লালমাই","মেঘনা","মনোহরগঞ্জ","মুরাদনগর","নাঙ্গলকোট","তিতাস"],
+  "চাঁদপুর":["চাঁদপুর সদর","ফরিদগঞ্জ","হাইমচর","হাজীগঞ্জ","কচুয়া","মতলব দক্ষিণ","মতলব উত্তর","শাহরাস্তি"],
+  "ফেনী":["ফেনী সদর","ছাগলনাইয়া","দাগনভূঞা","পরশুরাম","ফুলগাজী","সোনাগাজী"],
+  "লক্ষ্মীপুর":["লক্ষ্মীপুর সদর","রায়পুর","রামগঞ্জ","রামগতি","কমলনগর"],
+  "নোয়াখালী":["নোয়াখালী সদর","বেগমগঞ্জ","চাটখিল","কোম্পানীগঞ্জ","হাতিয়া","কবিরহাট","সেনবাগ","সোনাইমুড়ী","সুবর্ণচর"],
+  "খাগড়াছড়ি":["খাগড়াছড়ি সদর","দীঘিনালা","পানছড়ি","লক্ষ্মীছড়ি","মহালছড়ি","মানিকছড়ি","রামগড়","মাটিরাঙ্গা","গুইমারা"],
+  "রাঙ্গামাটি":["রাঙ্গামাটি সদর","কাপ্তাই","কাউখালী","বাঘাইছড়ি","বরকল","জুরাছড়ি","বিলাইছড়ি","রাজস্থলী","লংগদু","নানিয়ারচর"],
+  "বান্দরবান":["বান্দরবান সদর","আলীকদম","থানচি","লামা","নাইক্ষ্যংছড়ি","রোয়াংছড়ি","রুমা"]
 };
-
-const division = document.getElementById("division");
-const district = document.getElementById("district");
-const upazila = document.getElementById("upazila");
-const message = document.getElementById("message");
-const search = document.getElementById("search");
-const results = document.getElementById("results");
-
-function fillSelect(el, items, placeholder) {
-  el.innerHTML = "";
-  const first = document.createElement("option");
-  first.value = "";
-  first.textContent = placeholder;
-  el.appendChild(first);
-
-  items.forEach(item => {
-    const option = document.createElement("option");
-    option.value = item;
-    option.textContent = item;
-    el.appendChild(option);
-  });
-}
-
-fillSelect(division, Object.keys(districts), "-- বিভাগ বেছে নিন --");
-
-division.addEventListener("change", () => {
-  fillSelect(
-    district,
-    districts[division.value] || [],
-    "-- জেলা বেছে নিন --"
-  );
-  district.disabled = !division.value;
-  fillSelect(upazila, [], "-- প্রথমে জেলা বেছে নিন --");
-  upazila.disabled = true;
-});
-
-district.addEventListener("change", () => {
-  const list = upazilas[district.value] || [];
-  fillSelect(
-    upazila,
-    list,
-    list.length ? "-- উপজেলা বেছে নিন --" :
-    "-- এই জেলার উপজেলা তালিকা এখনো যোগ করা হয়নি --"
-  );
-  upazila.disabled = list.length === 0;
-});
-
-document.getElementById("show").addEventListener("click", () => {
-  if (!division.value) {
-    message.textContent = "প্রথমে একটি বিভাগ নির্বাচন করুন।";
-    return;
-  }
-  if (!district.value) {
-    message.textContent = "এবার একটি জেলা নির্বাচন করুন।";
-    return;
-  }
-
-  message.innerHTML = "";
-
-  const title = document.createElement("strong");
-  title.textContent = "আপনার নির্বাচিত স্থান";
-  message.appendChild(title);
-
-  const info = document.createElement("p");
-  info.textContent =
-    "বিভাগ: " + division.value +
-    " | জেলা: " + district.value +
-    (upazila.value ? " | উপজেলা: " + upazila.value : "");
-  message.appendChild(info);
-
-  if (!upazilas[district.value]) {
-    const note = document.createElement("p");
-    note.textContent =
-      "এই জেলার উপজেলা তালিকা পরবর্তী আপডেটে যোগ করা হবে।";
-    message.appendChild(note);
-  }
-});
-
-function selectPlace(div, dist, upa) {
-  division.value = div;
-  division.dispatchEvent(new Event("change"));
-  district.value = dist;
-  district.dispatchEvent(new Event("change"));
-
-  if (upa && upazilas[dist] && upazilas[dist].includes(upa)) {
-    upazila.value = upa;
-  }
-
-  document.getElementById("show").click();
-  results.innerHTML = "";
-  search.value = "";
-}
-
-search.addEventListener("input", () => {
-  const query = search.value.trim().toLowerCase();
-  results.innerHTML = "";
-  if (!query) return;
-
-  let count = 0;
-
-  Object.keys(districts).forEach(div => {
-    districts[div].forEach(dist => {
-      const list = upazilas[dist] || [];
-      const matchedUpazilas = list.filter(u =>
-        u.toLowerCase().includes(query)
-      );
-      const divMatch = div.toLowerCase().includes(query);
-      const distMatch = dist.toLowerCase().includes(query);
-
-      if (divMatch || distMatch || matchedUpazilas.length) {
-        const item = document.createElement("div");
-        item.className = "result";
-        item.textContent = div + " › " + dist;
-        item.addEventListener("click", () => {
-          selectPlace(div, dist, matchedUpazilas[0] || "");
-        });
-        results.appendChild(item);
-        count++;
-      }
-
-      matchedUpazilas.forEach(u => {
-        const item = document.createElement("div");
-        item.className = "result";
-        item.textContent = div + " › " + dist + " › " + u;
-        item.addEventListener("click", () => selectPlace(div, dist, u));
-        results.appendChild(item);
-        count++;
-      });
-    });
-  });
-
-  if (!count) {
-    const item = document.createElement("div");
-    item.className = "result";
-    item.textContent = "কোনো মিল পাওয়া যায়নি। বানান যাচাই করে আবার চেষ্টা করুন।";
-    results.appendChild(item);
-  }
-});
+const division=document.getElementById('division'), district=document.getElementById('district'), upazila=document.getElementById('upazila'), message=document.getElementById('message'), search=document.getElementById('search'), results=document.getElementById('results'), loadStatus=document.getElementById('loadStatus'), showBtn=document.getElementById('show');
+let places=[];
+function fillSelect(el,items,placeholder){el.innerHTML='';const first=document.createElement('option');first.value='';first.textContent=placeholder;el.appendChild(first);items.forEach(item=>{const op=document.createElement('option');op.value=item;op.textContent=item;el.appendChild(op)});}
+function buildPlaces(){places=[];Object.entries(districts).forEach(([div,list])=>list.forEach(dist=>places.push({division:div,district:dist,upazilas:upazilas[dist]||[]})));fillSelect(division,Object.keys(districts),'-- বিভাগ বেছে নিন --');showBtn.disabled=false;const total=places.reduce((n,p)=>n+p.upazilas.length,0);loadStatus.textContent=`অফলাইন তালিকা প্রস্তুত: ${Object.keys(districts).length} বিভাগ, ${places.length} জেলা। বর্তমানে ${total}টি উপজেলার নাম অন্তর্ভুক্ত আছে; বাকি জেলার উপজেলা তালিকা এই সংস্করণে নেই।`}
+function resetMessage(t){message.textContent=t}
+division.addEventListener('change',()=>{fillSelect(district,districts[division.value]||[],'-- জেলা বেছে নিন --');district.disabled=!division.value;fillSelect(upazila,[],'-- প্রথমে জেলা বেছে নিন --');upazila.disabled=true;resetMessage('আপনার পছন্দের বিভাগ, জেলা ও উপজেলা নির্বাচন করুন।')});
+district.addEventListener('change',()=>{const p=places.find(x=>x.division===division.value&&x.district===district.value);fillSelect(upazila,p?.upazilas||[],p?.upazilas.length?'-- উপজেলা বেছে নিন --':'-- এই জেলার উপজেলা তালিকা যোগ করা হয়নি --');upazila.disabled=!(p?.upazilas.length);resetMessage(p?.upazilas.length?'তথ্য দেখতে “তথ্য দেখুন” চাপুন।':'এই জেলার উপজেলা তালিকা এই অফলাইন সংস্করণে নেই।')});
+showBtn.addEventListener('click',()=>{if(!division.value)return resetMessage('প্রথমে একটি বিভাগ নির্বাচন করুন।');if(!district.value)return resetMessage('এবার একটি জেলা নির্বাচন করুন।');const p=places.find(x=>x.division===division.value&&x.district===district.value);message.innerHTML='';const strong=document.createElement('strong');strong.textContent='আপনার নির্বাচিত স্থান';message.appendChild(strong);const info=document.createElement('p');info.textContent='বিভাগ: '+division.value+' | জেলা: '+district.value+(upazila.value?' | উপজেলা: '+upazila.value:'');message.appendChild(info);const detail=document.createElement('p');detail.textContent=upazila.value?'আপনি '+upazila.value+' উপজেলা নির্বাচন করেছেন।':p?.upazilas.length?`এই জেলায় তালিকাভুক্ত উপজেলা: ${p.upazilas.length}টি।`:'এই জেলার উপজেলা তালিকা অফলাইন সংস্করণে যোগ করা হয়নি।';message.appendChild(detail);if(p?.upazilas.length&&!upazila.value){const list=document.createElement('p');list.textContent='উপজেলাসমূহ: '+p.upazilas.join('، ');message.appendChild(list)}});
+function selectPlace(p,upa=''){division.value=p.division;division.dispatchEvent(new Event('change'));district.value=p.district;district.dispatchEvent(new Event('change'));if(upa&&[...upazila.options].some(o=>o.value===upa))upazila.value=upa;showBtn.click();results.innerHTML='';search.value=''}
+search.addEventListener('input',()=>{const q=search.value.trim().toLocaleLowerCase('bn');results.innerHTML='';if(!q)return;let count=0;const add=(p,u='')=>{if(count>=60)return;const item=document.createElement('div');item.className='result';item.textContent=p.division+' › '+p.district+(u?' › '+u:'');item.addEventListener('click',()=>selectPlace(p,u));results.appendChild(item);count++};places.forEach(p=>{if(p.division.toLocaleLowerCase('bn').includes(q)||p.district.toLocaleLowerCase('bn').includes(q))add(p);p.upazilas.forEach(u=>{if(u.toLocaleLowerCase('bn').includes(q))add(p,u)})});if(!count){const item=document.createElement('div');item.className='result';item.textContent='কোনো মিল পাওয়া যায়নি। বানান যাচাই করে আবার চেষ্টা করুন।';results.appendChild(item)}});
+buildPlaces();
 </script>
-</body>
-</html>
+</body></html>

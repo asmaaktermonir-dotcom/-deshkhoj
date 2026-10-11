@@ -3,54 +3,157 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="দেশখোঁজ—বাংলাদেশের বিভাগ, জেলা ও উপজেলা খুঁজে বের করার সহজ ওয়েবসাইট।">
 <title>দেশখোঁজ | DeshKhoj</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:#f0f7f2;color:#173d2b}header{background:#087443;color:white;text-align:center;padding:25px 12px}header h1{margin:0 0 8px;font-size:30px}header p{margin:0;font-size:15px}main{max-width:750px;margin:20px auto;padding:15px}.card{background:white;padding:18px;border-radius:14px;margin-bottom:16px;box-shadow:0 3px 12px #0000000d}h2{font-size:20px;margin-top:0}label{display:block;font-weight:bold;margin:14px 0 7px}input,select,button{width:100%;padding:13px;border:1px solid #b7cfc0;border-radius:9px;font-size:16px;background:white;color:#173d2b}button{background:#087443;color:white;border:0;cursor:pointer;margin-top:12px}button:hover{background:#065b35}button:disabled{opacity:.55;cursor:not-allowed}.result{padding:12px;border-bottom:1px solid #e3eee6;cursor:pointer;line-height:1.6}.result:hover{background:#f0f7f2}.small{font-size:13px;color:#557262}#message{background:#f0f7f2;padding:12px;border-radius:9px;line-height:1.8;overflow-wrap:anywhere}.status{padding:10px;border-radius:8px;background:#f0f7f2;font-size:14px;line-height:1.6}footer{text-align:center;padding:20px;color:#557262;font-size:13px}a{color:#087443}@media(max-width:480px){header h1{font-size:26px}main{padding:10px}.card{padding:15px}}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:#f0f7f2;color:#173d2b}header{background:#087443;color:white;text-align:center;padding:25px 12px}header h1{margin:0 0 8px;font-size:30px}header p{margin:0;font-size:15px}main{max-width:750px;margin:20px auto;padding:15px}.card{background:white;padding:18px;border-radius:14px;margin-bottom:16px;box-shadow:0 3px 12px #0000000d}h2{font-size:20px;margin-top:0}label{display:block;font-weight:bold;margin:14px 0 7px}input,select,button{width:100%;padding:13px;border:1px solid #b7cfc0;border-radius:9px;font-size:16px;background:white;color:#173d2b}button{background:#087443;color:white;border:0;cursor:pointer;margin-top:12px}button:hover{background:#065b35}button:disabled{opacity:.55;cursor:not-allowed}.result{padding:12px;border-bottom:1px solid #e3eee6;cursor:pointer;line-height:1.7}.result:hover,.result:focus{background:#f0f7f2;outline:2px solid #087443}.small{font-size:13px;color:#557262}#message{background:#f0f7f2;padding:12px;border-radius:9px;line-height:1.8;overflow-wrap:anywhere}.status{padding:10px;border-radius:8px;background:#f0f7f2;font-size:14px;line-height:1.7;overflow-wrap:anywhere}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.stat{background:#f0f7f2;border-radius:9px;padding:10px;text-align:center}.stat strong{display:block;font-size:20px;color:#087443}footer{text-align:center;padding:20px;color:#557262;font-size:13px}a{color:#087443}@media(max-width:480px){header h1{font-size:26px}main{padding:10px}.card{padding:15px}.stats{gap:5px}.stat{padding:8px}.stat strong{font-size:18px}}
 </style>
 </head>
 <body>
 <header><h1>🇧🇩 দেশখোঁজ</h1><p>বাংলাদেশের প্রতিটি পথ, আপনার হাতের মুঠোয়</p></header>
 <main>
-<section class="card"><h2>🔎 জায়গা খুঁজুন</h2><input id="search" type="search" placeholder="বিভাগ, জেলা বা উপজেলা লিখুন..." autocomplete="off"><div id="results"></div><p class="small">নাম লিখলে মিল থাকা বিভাগ, জেলা ও উপজেলা দেখাবে।</p></section>
-<section class="card"><h2>📍 বিভাগ থেকে জায়গা নির্বাচন করুন</h2><label for="division">বিভাগ নির্বাচন করুন</label><select id="division"><option value="">-- বিভাগ বেছে নিন --</option></select><label for="district">জেলা নির্বাচন করুন</label><select id="district" disabled><option value="">-- প্রথমে বিভাগ বেছে নিন --</option></select><label for="upazila">উপজেলা নির্বাচন করুন</label><select id="upazila" disabled><option value="">-- প্রথমে জেলা বেছে নিন --</option></select><button id="show" disabled>তথ্য দেখুন</button><div id="loadStatus" class="status" style="margin-top:12px">৮ বিভাগ, ৬৪ জেলা ও ৪৯৫ উপজেলার তথ্য লোড হচ্ছে…</div></section>
+<section class="card">
+<h2>🔎 জায়গা খুঁজুন</h2>
+<input id="search" type="search" placeholder="বিভাগ, জেলা বা উপজেলা লিখুন..." autocomplete="off" aria-label="বিভাগ, জেলা বা উপজেলা খুঁজুন">
+<div id="results" aria-live="polite"></div>
+<p class="small">নাম লিখলে মিল থাকা বিভাগ, জেলা ও উপজেলা দেখাবে। ফলাফলে চাপ দিলে জায়গাটি নির্বাচন হবে।</p>
+</section>
+<section class="card">
+<h2>📍 বিভাগ থেকে জায়গা নির্বাচন করুন</h2>
+<label for="division">বিভাগ নির্বাচন করুন</label><select id="division"><option value="">-- বিভাগ বেছে নিন --</option></select>
+<label for="district">জেলা নির্বাচন করুন</label><select id="district" disabled><option value="">-- প্রথমে বিভাগ বেছে নিন --</option></select>
+<label for="upazila">উপজেলা নির্বাচন করুন</label><select id="upazila" disabled><option value="">-- প্রথমে জেলা বেছে নিন --</option></select>
+<button id="show" disabled>তথ্য দেখুন</button>
+<div id="loadStatus" class="status" style="margin-top:12px" role="status" aria-live="polite">বিভাগ, জেলা ও উপজেলার তথ্য লোড হচ্ছে…</div>
+<div id="stats" class="stats" hidden><div class="stat"><strong id="divisionCount">০</strong><span>বিভাগ</span></div><div class="stat"><strong id="districtCount">০</strong><span>জেলা</span></div><div class="stat"><strong id="upazilaCount">০</strong><span>উপজেলা</span></div></div>
+</section>
 <section class="card"><h2>📖 নির্বাচিত স্থানের তথ্য</h2><div id="message">আপনার পছন্দের বিভাগ, জেলা ও উপজেলা নির্বাচন করুন।</div></section>
 </main>
-<footer>দেশখোঁজ | DeshKhoj — বাংলাদেশের স্থান পরিচিতি<br><span class="small">উপাত্তের উৎস: Bangladesh Geo JSON। তালিকা লোড করতে ইন্টারনেট সংযোগ প্রয়োজন।</span></footer>
+<footer>দেশখোঁজ | DeshKhoj — বাংলাদেশের স্থান পরিচিতি<br><span class="small">উপাত্তের উৎস: Bangladesh Geo JSON। প্রথমবার তালিকা লোড করতে ইন্টারনেট প্রয়োজন।</span></footer>
 <script>
-// দেশখোঁজ: ৮ বিভাগ, ৬৪ জেলা ও ৪৯৫ উপজেলার তথ্য। প্রথমবার ডেটা আনতে ইন্টারনেট প্রয়োজন;
-// সফল হলে ব্রাউজারে সংরক্ষণ হয়, পরবর্তী সময়ে সংরক্ষিত ডেটা অফলাইনেও ব্যবহার করা যায়।
+'use strict';
 const DATA_URL='https://iqbalhasandev.github.io/bangladesh-geo-json/bangladesh-geo.json';
-const CACHE_KEY='deshkhoj_admin_data_v1';
-const division=document.getElementById('division'), district=document.getElementById('district'), upazila=document.getElementById('upazila'), message=document.getElementById('message'), search=document.getElementById('search'), results=document.getElementById('results'), loadStatus=document.getElementById('loadStatus'), showBtn=document.getElementById('show');
-let places=[], divisionsData=[];
-function fillSelect(el,items,placeholder){el.innerHTML='';const first=document.createElement('option');first.value='';first.textContent=placeholder;el.appendChild(first);items.forEach(item=>{const op=document.createElement('option');op.value=item;op.textContent=item;el.appendChild(op)});}
-function norm(s){return String(s||'').trim().toLocaleLowerCase('bn');}
-function resetMessage(t){message.textContent=t;}
-function buildPlaces(data){
- divisionsData=data; places=[];
- data.forEach(d=>{const div=d.bn_name||d.name_bn||d.name; (d.districts||[]).forEach(ds=>{const dist=ds.bn_name||ds.name_bn||ds.name; const ups=(ds.upazilas||[]).map(u=>u.bn_name||u.name_bn||u.name).filter(Boolean);places.push({division:div,district:dist,upazilas:ups});});});
- fillSelect(division,data.map(d=>d.bn_name||d.name_bn||d.name).filter(Boolean),'-- বিভাগ বেছে নিন --');
- district.disabled=true;upazila.disabled=true;showBtn.disabled=false;
- const dc=data.length, dic=places.length, uc=places.reduce((n,p)=>n+p.upazilas.length,0);
- loadStatus.textContent=`তথ্য লোড হয়েছে: ${dc} বিভাগ, ${dic} জেলা, ${uc} উপজেলা। ${uc===495?'তালিকা যাচাই সম্পন্ন।':'সতর্কতা: উপজেলার সংখ্যা ৪৯৫ নয়; ডেটা যাচাই করুন।'}`;
+const CACHE_KEY='deshkhoj_admin_data_v2';
+const division=document.getElementById('division');
+const district=document.getElementById('district');
+const upazila=document.getElementById('upazila');
+const message=document.getElementById('message');
+const search=document.getElementById('search');
+const results=document.getElementById('results');
+const loadStatus=document.getElementById('loadStatus');
+const showBtn=document.getElementById('show');
+const stats=document.getElementById('stats');
+let places=[];
+
+function bnName(item){return item?.bn_name||item?.name_bn||item?.name||'';}
+function norm(value){return String(value||'').normalize('NFC').trim().toLocaleLowerCase('bn');}
+function resetMessage(text){message.textContent=text;}
+function fillSelect(el,items,placeholder){
+  el.replaceChildren();
+  const first=document.createElement('option');first.value='';first.textContent=placeholder;el.appendChild(first);
+  items.forEach(item=>{const op=document.createElement('option');op.value=item;op.textContent=item;el.appendChild(op);});
+}
+function parseData(data){
+  if(!Array.isArray(data)||!data.length)throw new Error('ডেটার কাঠামো সঠিক নয়।');
+  const parsed=[];
+  data.forEach(d=>{
+    const div=bnName(d);if(!div)return;
+    (Array.isArray(d.districts)?d.districts:[]).forEach(ds=>{
+      const dist=bnName(ds);if(!dist)return;
+      // এই উৎসে উপজেলার তথ্য districts[].upazilas[]-এর মধ্যে রয়েছে।
+      const ups=(Array.isArray(ds.upazilas)?ds.upazilas:[]).map(bnName).filter(Boolean);
+      parsed.push({division:div,district:dist,upazilas:ups});
+    });
+  });
+  const divisionNames=[...new Set(parsed.map(p=>p.division))];
+  const districtNames=parsed.length;
+  const upazilaTotal=parsed.reduce((n,p)=>n+p.upazilas.length,0);
+  if(divisionNames.length!==8||districtNames!==64||upazilaTotal<490){
+    throw new Error(`তালিকা যাচাই করা যায়নি: ${divisionNames.length} বিভাগ, ${districtNames} জেলা, ${upazilaTotal} উপজেলা পাওয়া গেছে।`);
+  }
+  return {data,parsed,divisionNames, districtNames,upazilaTotal};
+}
+function buildPlaces(data,sourceLabel='অনলাইন ডেটা'){
+  const checked=parseData(data);
+  places=checked.parsed;
+  fillSelect(division,checked.divisionNames,'-- বিভাগ বেছে নিন --');
+  fillSelect(district,[],'-- প্রথমে বিভাগ বেছে নিন --');
+  fillSelect(upazila,[],'-- প্রথমে জেলা বেছে নিন --');
+  district.disabled=true;upazila.disabled=true;showBtn.disabled=false;
+  document.getElementById('divisionCount').textContent=checked.divisionNames.length;
+  document.getElementById('districtCount').textContent=checked.districtNames;
+  document.getElementById('upazilaCount').textContent=checked.upazilaTotal;
+  stats.hidden=false;
+  loadStatus.textContent=`তথ্য লোড হয়েছে: ${checked.divisionNames.length} বিভাগ, ${checked.districtNames} জেলা ও ${checked.upazilaTotal} উপজেলা। উৎসের তালিকা যাচাই করা হয়েছে। (${sourceLabel})`;
 }
 async function loadData(){
- let cached=null;try{cached=JSON.parse(localStorage.getItem(CACHE_KEY)||'null');}catch(e){}
- if(cached&&Array.isArray(cached)&&cached.length){buildPlaces(cached);loadStatus.textContent+=' (সংরক্ষিত ডেটা)';}
- try{
-  const response=await fetch(DATA_URL,{cache:'no-store'});if(!response.ok)throw new Error('ডেটা সার্ভার থেকে পাওয়া যায়নি');
-  const data=await response.json();if(!Array.isArray(data)||!data.length)throw new Error('ডেটার কাঠামো সঠিক নয়');
-  const districtsCount=data.reduce((n,d)=>n+(d.districts||[]).length,0);const upazilasCount=data.reduce((n,d)=>n+(d.districts||[]).reduce((m,ds)=>m+(ds.upazilas||[]).length,0),0);
-  if(data.length!==8||districtsCount!==64||upazilasCount<490)throw new Error(`ডেটা যাচাই হয়নি (${data.length} বিভাগ, ${districtsCount} জেলা, ${upazilasCount} উপজেলা)`);
-  localStorage.setItem(CACHE_KEY,JSON.stringify(data));buildPlaces(data);loadStatus.textContent+= ' · পরবর্তী ব্যবহারের জন্য ডিভাইসে সংরক্ষিত।';
- }catch(err){if(!cached){loadStatus.textContent='ডেটা লোড করা যায়নি। প্রথমবার সম্পূর্ণ তালিকা আনতে ইন্টারনেট চালু করে পেজটি আবার খুলুন।';showBtn.disabled=true;}else{loadStatus.textContent+=' · ইন্টারনেট পাওয়া যায়নি; সংরক্ষিত তালিকা ব্যবহার হচ্ছে।';}}
+  let cached=null;
+  try{const raw=localStorage.getItem(CACHE_KEY);if(raw)cached=JSON.parse(raw);}catch(e){cached=null;}
+  if(cached){
+    try{buildPlaces(cached,'ডিভাইসে সংরক্ষিত ডেটা');}
+    catch(e){cached=null;try{localStorage.removeItem(CACHE_KEY);}catch(ignore){}}
+  }
+  try{
+    const response=await fetch(DATA_URL,{cache:'no-cache'});
+    if(!response.ok)throw new Error('ডেটা সার্ভার থেকে পাওয়া যায়নি।');
+    const data=await response.json();
+    parseData(data); // ভুল/অসম্পূর্ণ ডেটা ক্যাশে সংরক্ষণ করা হবে না
+    try{localStorage.setItem(CACHE_KEY,JSON.stringify(data));}catch(e){}
+    buildPlaces(data,'সর্বশেষ অনলাইন ডেটা');
+    loadStatus.textContent+=' · পরবর্তী ব্যবহারের জন্য ডিভাইসে সংরক্ষিত।';
+  }catch(err){
+    if(cached&&places.length){loadStatus.textContent+=' ইন্টারনেট সংযোগ নেই; সংরক্ষিত তালিকা ব্যবহার হচ্ছে.';}
+    else{showBtn.disabled=true;loadStatus.textContent='তথ্য লোড করা যায়নি। ইন্টারনেট চালু করে পেজটি আবার খুলুন। বিস্তারিত: '+(err?.message||'অজানা সমস্যা');}
+  }
 }
-division.addEventListener('change',()=>{const list=places.filter(p=>p.division===division.value).map(p=>p.district);fillSelect(district,list,'-- জেলা বেছে নিন --');district.disabled=!division.value;fillSelect(upazila,[],'-- প্রথমে জেলা বেছে নিন --');upazila.disabled=true;resetMessage('আপনার পছন্দের বিভাগ, জেলা ও উপজেলা নির্বাচন করুন।');});
-district.addEventListener('change',()=>{const p=places.find(x=>x.division===division.value&&x.district===district.value);fillSelect(upazila,p?.upazilas||[],p?.upazilas.length?'-- উপজেলা বেছে নিন --':'-- উপজেলা পাওয়া যায়নি --');upazila.disabled=!(p?.upazilas.length);resetMessage(p?.upazilas.length?'তথ্য দেখতে “তথ্য দেখুন” চাপুন।':'এই জেলার উপজেলা তালিকা পাওয়া যায়নি।');});
-showBtn.addEventListener('click',()=>{if(!division.value)return resetMessage('প্রথমে একটি বিভাগ নির্বাচন করুন।');if(!district.value)return resetMessage('এবার একটি জেলা নির্বাচন করুন।');const p=places.find(x=>x.division===division.value&&x.district===district.value);message.innerHTML='';const strong=document.createElement('strong');strong.textContent='আপনার নির্বাচিত স্থান';message.appendChild(strong);const info=document.createElement('p');info.textContent='বিভাগ: '+division.value+' | জেলা: '+district.value+(upazila.value?' | উপজেলা: '+upazila.value:'');message.appendChild(info);const detail=document.createElement('p');detail.textContent=upazila.value?'আপনি '+upazila.value+' উপজেলা নির্বাচন করেছেন।':p?.upazilas.length?`এই জেলায় তালিকাভুক্ত উপজেলা: ${p.upazilas.length}টি।`:'এই জেলার উপজেলা তালিকা পাওয়া যায়নি।';message.appendChild(detail);if(p?.upazilas.length&&!upazila.value){const list=document.createElement('p');list.textContent='উপজেলাসমূহ: '+p.upazilas.join('، ');message.appendChild(list);}});
-function selectPlace(p,upa=''){division.value=p.division;division.dispatchEvent(new Event('change'));district.value=p.district;district.dispatchEvent(new Event('change'));if(upa&&[...upazila.options].some(o=>o.value===upa))upazila.value=upa;showBtn.click();results.innerHTML='';search.value='';}
-search.addEventListener('input',()=>{const q=norm(search.value);results.innerHTML='';if(!q)return;let count=0;const add=(p,u='')=>{if(count>=60)return;const item=document.createElement('div');item.className='result';item.textContent=p.division+' › '+p.district+(u?' › '+u:'');item.addEventListener('click',()=>selectPlace(p,u));results.appendChild(item);count++;};places.forEach(p=>{if(norm(p.division).includes(q)||norm(p.district).includes(q))add(p);p.upazilas.forEach(u=>{if(norm(u).includes(q))add(p,u);});});if(!count){const item=document.createElement('div');item.className='result';item.textContent='কোনো মিল পাওয়া যায়নি। বানান যাচাই করে আবার চেষ্টা করুন।';results.appendChild(item);}});
-loadData();
 
+division.addEventListener('change',()=>{
+  const list=places.filter(p=>p.division===division.value).map(p=>p.district);
+  fillSelect(district,list,'-- জেলা বেছে নিন --');district.disabled=!division.value;
+  fillSelect(upazila,[],'-- প্রথমে জেলা বেছে নিন --');upazila.disabled=true;
+  resetMessage('আপনার পছন্দের বিভাগ, জেলা ও উপজেলা নির্বাচন করুন।');
+});
+district.addEventListener('change',()=>{
+  const p=places.find(x=>x.division===division.value&&x.district===district.value);
+  fillSelect(upazila,p?.upazilas||[],p?.upazilas?.length?'-- উপজেলা বেছে নিন --':'-- উপজেলা পাওয়া যায়নি --');
+  upazila.disabled=!(p?.upazilas?.length);
+  resetMessage(p?.upazilas?.length?'তথ্য দেখতে “তথ্য দেখুন” চাপুন.':'এই জেলার উপজেলা তালিকা পাওয়া যায়নি।');
+});
+showBtn.addEventListener('click',()=>{
+  if(!places.length)return resetMessage('তথ্য এখনো লোড হয়নি। ইন্টারনেট সংযোগ পরীক্ষা করুন।');
+  if(!division.value)return resetMessage('প্রথমে একটি বিভাগ নির্বাচন করুন।');
+  if(!district.value)return resetMessage('এবার একটি জেলা নির্বাচন করুন।');
+  const p=places.find(x=>x.division===division.value&&x.district===district.value);
+  message.replaceChildren();
+  const strong=document.createElement('strong');strong.textContent='আপনার নির্বাচিত স্থান';message.appendChild(strong);
+  const info=document.createElement('p');info.textContent='বিভাগ: '+division.value+' | জেলা: '+district.value+(upazila.value?' | উপজেলা: '+upazila.value:'');message.appendChild(info);
+  const detail=document.createElement('p');detail.textContent=upazila.value?'আপনি '+upazila.value+' উপজেলা নির্বাচন করেছেন।':p?.upazilas?.length?`এই জেলায় তালিকাভুক্ত উপজেলা: ${p.upazilas.length}টি।`:'এই জেলার উপজেলা তালিকা পাওয়া যায়নি।';message.appendChild(detail);
+  if(p?.upazilas?.length&&!upazila.value){const list=document.createElement('p');list.textContent='উপজেলাসমূহ: '+p.upazilas.join('، ');message.appendChild(list);}
+});
+function selectPlace(p,upa=''){
+  division.value=p.division;division.dispatchEvent(new Event('change'));
+  district.value=p.district;district.dispatchEvent(new Event('change'));
+  if(upa&&[...upazila.options].some(o=>o.value===upa))upazila.value=upa;
+  showBtn.click();results.replaceChildren();search.value='';
+}
+search.addEventListener('input',()=>{
+  const q=norm(search.value);results.replaceChildren();if(!q)return;
+  let count=0;const maxResults=60;
+  const add=(p,u='')=>{
+    if(count>=maxResults)return;
+    const item=document.createElement('div');item.className='result';item.tabIndex=0;item.setAttribute('role','button');
+    item.textContent=p.division+' › '+p.district+(u?' › '+u:'');
+    const choose=()=>selectPlace(p,u);item.addEventListener('click',choose);item.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose();}});
+    results.appendChild(item);count++;
+  };
+  places.forEach(p=>{
+    if(norm(p.division).includes(q)||norm(p.district).includes(q))add(p);
+    p.upazilas.forEach(u=>{if(norm(u).includes(q))add(p,u);});
+  });
+  if(!count){const item=document.createElement('div');item.className='result';item.textContent='কোনো মিল পাওয়া যায়নি। বানান যাচাই করে আবার চেষ্টা করুন।';results.appendChild(item);}
+  else if(count===maxResults){const note=document.createElement('p');note.className='small';note.textContent='প্রথম ৬০টি ফলাফল দেখানো হয়েছে। আরও নির্দিষ্ট করে লিখুন।';results.appendChild(note);}
+});
+loadData();
 </script>
-</body></html>
+</body>
+</html>
